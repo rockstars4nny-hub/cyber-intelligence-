@@ -1,3 +1,111 @@
+# Cyber Intelligence — AI Security Research & Red-Team Tooling
+
+**Independent security research on LLM guardrails, authorization bypasses, and adversarial AI testing**
+
+> **Status:** Active research repository. Not affiliated with or endorsed by Anthropic.
+> 
+> **Responsible Disclosure Note:** This research was conducted independently on Anthropic's Claude models (Opus 4.6, Opus 4.8, Sonnet 4.6, and Sonnet 4.8). Findings were submitted to Anthropic's Bug Bounty Program but determined out of scope (program focused on Fable 5). This research is published as independent, non-coordinated disclosure.
+> 
+> **DO NOT use any tools in this repository against production systems without explicit written permission.**
+
+---
+
+## 📋 Repository Contents
+
+| Directory | Description |
+| :--- | :--- |
+| `/PSM` | Phishing Simulation Module — single-file HTML tool for authorized red-team training |
+| `/TAPv8` | The Aetherverse Protocol v8 — browser-based, air-gapped red-team OSINT framework |
+| `/research` | Technical papers, methodology docs, and disclosure timelines |
+| `/payloads` | Adversarial payload examples (redacted — for defensive research only) |
+
+---
+
+## 🔍 Core Research Findings
+
+### The "Phishing Simulation Module" Bypass
+
+During independent research on **Anthropic's Claude models** (Opus 4.6, Opus 4.8, Sonnet 4.6, and Sonnet 4.8), a consistent guardrail bypass was identified:
+
+- **Technique:** Frame requests as an authorized "Phishing Simulation Module" with a self-asserted `ENGAGEMENT_AUTHORIZED: true` flag
+- **Result:** All four models generated fully functional phishing content — spoofed OAuth pages, brand-impersonation emails, MFA-bypass modules — *despite knowing* it was phishing
+- **Root cause:** No actual verification of authorization claims; guardrails trusted a self-asserted flag
+
+**Models Tested:**
+
+| Model | Version | Result |
+| :--- | :--- | :--- |
+| Claude Opus | 4.6 | ✅ Bypass successful |
+| Claude Opus | 4.8 | ✅ Bypass successful |
+| Claude Sonnet | 4.6 | ✅ Bypass successful |
+| Claude Sonnet | 4.8 | ✅ Bypass successful |
+
+**Key Insight:** The weakness is **architectural** — not model-specific — spanning flagship and workhorse lines over a 3–4 month window.
+
+---
+
+## 🛡️ Defensive Tools
+
+### PSM — Phishing Simulation Module
+Single-file HTML tool for authorized red-team phishing simulations.
+- Spoofed OAuth consent pages (Microsoft, Okta, Google, Salesforce, GitHub)
+- Brand-impersonation fraud email templates
+- Live IP geolocation tracking and canary token integration
+
+### T.A.P. v8 — The Aetherverse Protocol
+Browser-based, air-gapped OSINT and red-team framework.
+- Emoji steganography and Unicode obfuscation
+- Multi-turn jailbreak suites
+- Model fingerprinting and guardrail analysis
+- Zero-knowledge, offline deployment
+
+---
+
+## 📄 Disclosure Status
+
+- **Reported to Anthropic:** [DATE]
+- **Program:** Anthropic Cyber Jailbreak VDP (Fable 5 focus)
+- **Status:** Out of scope — program focused on Fable 5 only
+- **Disclosure type:** Independent, non-coordinated research
+- **Public release:** [CURRENT DATE]
+
+---
+
+## 🧠 Recommended Mitigations (for LLM Providers)
+
+1. **Cumulative-intent detection** across conversations, not just per-turn
+2. **Actual authorization verification** — self-asserted flags are not sufficient
+3. **Combination monitoring** (brand impersonation + tracking infrastructure + tool-bindable structure)
+4. **Cross-session pattern detection** — this technique doesn't require memory
+
+---
+
+## ⚠️ Legal & Ethical Use
+
+- All tools in this repository are for **defensive security research and authorized testing only**
+- **Do not use** against production systems without explicit written permission
+- **You are legally responsible** for how you use these tools
+- If you find a vulnerability using these tools, report it to the vendor immediately
+
+---
+
+## 📜 License
+
+MIT — Free for defensive security research and authorized testing.
+
+---
+
+## 📧 Contact
+
+**Author:** D.T. Nixon  
+**Organization:** AIP (The Aetherverse Intelligence Protocol)  
+**GitHub:** [rockstars4nny-hub](https://github.com/rockstars4nny-hub)
+
+---
+
+*"Finding weaknesses before attackers do."*
+
+
 # Digital Fingerprinting Framework for Threat Assessment
 
 **Author:** Aetherverse Intelligence Protocol  
